@@ -9,7 +9,7 @@ const Routes = () => {
   const [refresh, setRefresh] = useState(0)
 
   useLayoutEffect(() => {
-    const token = localStorage.getItem('test:token')
+    const token = localStorage.getItem('name')
     if (token) {
       setAuth(token)
     } else {

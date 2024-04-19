@@ -13,7 +13,7 @@ const SignInPage = () => {
   const [login, setLogin] = React.useState('')
 
   const handleAuthLogin: () => void = () => {
-    localStorage.setItem('test:token', 'test')
+    localStorage.setItem('name', login)
     window.location.reload()
   }
 
@@ -95,7 +95,7 @@ export default SignInPage
 const CustomizedModal = styled(MuiModal)(`
 display: flex;
 flex-direction: column;
-justify-content: center;
+justify-content: space-between;
 align-items: center;
 .MuiBackdrop-root {
   position: absolute;
