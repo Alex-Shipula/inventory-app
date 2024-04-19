@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import React, { Component, type ErrorInfo, type ReactNode } from 'react'
 
 interface Props {
