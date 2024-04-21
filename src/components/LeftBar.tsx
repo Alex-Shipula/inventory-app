@@ -8,7 +8,7 @@ import LeftBarItem from './LeftBarItem'
 const items = ['ПРИХОД', 'ГРУППЫ', 'ПРОДУКТЫ', 'ПОЛЬЗОВАТЕЛИ', 'НАСТРОЙКИ']
 
 const routerList = [
-  '/income',
+  '/orders',
   '/groups',
   '/products',
   '/users',
