@@ -1,4 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { configureStore, combineReducers, isRejectedWithValue, type Middleware } from '@reduxjs/toolkit'
 import { setupListeners } from '@reduxjs/toolkit/query'
 

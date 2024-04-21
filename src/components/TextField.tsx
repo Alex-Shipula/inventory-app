@@ -2,9 +2,7 @@ import React, { useEffect, useState } from 'react'
 import MuiTextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 import useTheme from '@mui/material/styles/useTheme'
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import type { TextFieldProps as MuiTextFiledProps } from '@mui/material/TextField'
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Box, type SxProps, type Theme } from '@mui/material'
 
 type TextFieldMock = Record<string, string | Record<string, string | Record<string, string>>>

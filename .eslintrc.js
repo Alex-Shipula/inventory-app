@@ -31,7 +31,7 @@ module.exports = {
     "rules": {
         "@typescript-eslint/explicit-function-return-type": "off",
         "@typescript-eslint/strict-boolean-expressions": "off",
-        "@typescript-eslint/no-unused-vars": ["warn"],
+        "@typescript-eslint/no-unused-vars": ["off"],
         "@typescript-eslint/no-confusing-void-expression": "off",
         "@typescript-eslint/promise-function-async": "off",
         "@typescript-eslint/no-dynamic-delete": "off",

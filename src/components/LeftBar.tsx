@@ -3,7 +3,7 @@ import { Box, useTheme } from '@mui/material'
 import LogoutIcon from '@mui/icons-material/Logout'
 import { useLocation } from 'react-router-dom'
 import UserAvatar from './UserAvatar'
-import LeftBarItem from './LeftBarItem'
+import LeftBarItem from './items/LeftBarItem'
 
 const items = ['ПРИХОД', 'ГРУППЫ', 'ПРОДУКТЫ', 'ПОЛЬЗОВАТЕЛИ', 'НАСТРОЙКИ']
 
