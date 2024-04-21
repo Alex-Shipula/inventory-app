@@ -53,10 +53,6 @@ const SignInPage = () => {
             flexDirection: 'column',
             justifyContent: 'flexStart'
           }}>
-            <Typography variant='body1' sx={{
-              color: theme.palette.text.primary,
-              marginBottom: '4.5px'
-            }}>Login</Typography>
             <CustomizedInput
               value={login}
               type='text'

@@ -26,8 +26,18 @@ export default function Layout () {
       }}
     >
       <TopBar />
-      <LeftBar />
-      <Outlet />
+      <Box
+        display="flex"
+        justifyContent="flex-start"
+        alignItems="center"
+        sx={{
+          width: '100%',
+          height: '100%'
+        }}
+      >
+        <LeftBar />
+        <Outlet />
+      </Box>
     </Box>
   )
 }

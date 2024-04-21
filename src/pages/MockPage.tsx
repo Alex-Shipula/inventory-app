@@ -1,11 +1,14 @@
 import React from 'react'
 import { Typography } from '@mui/material'
+import WrapperPage from 'src/components/WrapperPage'
 
 const MockPage = () => {
   return (
-    <Typography>
+    <WrapperPage>
+      <Typography fontSize={30} >
         Mock Page
-    </Typography>
+      </Typography>
+    </WrapperPage>
   )
 }
 
