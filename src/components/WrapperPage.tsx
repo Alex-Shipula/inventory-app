@@ -7,8 +7,9 @@ const WrapperPage = ({ children }: { children: React.ReactNode }) => {
       display={'flex'}
       justifyContent={'center'}
       alignItems={'center'}
-      width={'100%'}
-      height={'100%'}
+      width={'100vw'}
+      minWidth={'max-content'}
+      height={'100vh'}
       padding={'50px 100px'}
     >
       {children}

@@ -23,6 +23,8 @@ export interface IProduct {
   date: string
   orderId: string
   groupId: string
+  groupTitle: string
+  orderTitle: string
 }
 
 export interface IPrice {
