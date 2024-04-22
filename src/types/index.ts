@@ -4,6 +4,7 @@ export interface IOrder {
   title: string
   date: string
   description: string
+  price: IPrice[]
   products: IProduct[]
 }
 

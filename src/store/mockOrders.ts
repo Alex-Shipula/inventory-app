@@ -9,6 +9,18 @@ export const mockOrders: IOrder[] = [
        передовыми решениями для улучшения визуального опыта и повышения производительности.`,
     date: '2021-10-01',
     description: 'Description 1',
+    price: [
+      {
+        value: 100,
+        symbol: 'USD',
+        isDefault: 1
+      },
+      {
+        value: 2500,
+        symbol: 'UAH',
+        isDefault: 0
+      }
+    ],
     products: [
       {
         id: '1',
@@ -218,6 +230,18 @@ export const mockOrders: IOrder[] = [
        передовыми решениями для улучшения визуального опыта и повышения производительности.`,
     date: '2021-10-01',
     description: 'Description 1',
+    price: [
+      {
+        value: 100,
+        symbol: 'USD',
+        isDefault: 1
+      },
+      {
+        value: 2500,
+        symbol: 'UAH',
+        isDefault: 0
+      }
+    ],
     products: [
       {
         id: '1',
@@ -427,6 +451,18 @@ export const mockOrders: IOrder[] = [
        передовыми решениями для улучшения визуального опыта и повышения производительности.`,
     date: '2021-10-01',
     description: 'Description 1',
+    price: [
+      {
+        value: 100,
+        symbol: 'USD',
+        isDefault: 1
+      },
+      {
+        value: 2500,
+        symbol: 'UAH',
+        isDefault: 0
+      }
+    ],
     products: [
       {
         id: '1',
@@ -636,6 +672,18 @@ export const mockOrders: IOrder[] = [
        передовыми решениями для улучшения визуального опыта и повышения производительности.`,
     date: '2021-10-01',
     description: 'Description 1',
+    price: [
+      {
+        value: 100,
+        symbol: 'USD',
+        isDefault: 1
+      },
+      {
+        value: 2500,
+        symbol: 'UAH',
+        isDefault: 0
+      }
+    ],
     products: [
       {
         id: '1',
