@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Paper, useTheme } from '@mui/material'
+import { Box, Paper, Tooltip, useTheme } from '@mui/material'
 import MonitorIcon from '@mui/icons-material/Monitor'
 import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone'
 import { IProduct } from 'src/types'
@@ -51,7 +51,7 @@ const ProductItem = ({ item }: { item: IProduct }) => {
           justifyContent={'start'}
           minWidth={'400px'}
         >
-          <TextItem text={item?.title} borderBottom isTooltip width={400}/>
+          <TextItem text={item?.title} borderBottom isTooltip width={400} />
           <TextItem text={`SN-${item?.serialNumber}`} weight={400} size={14} />
         </Box>
         <TextItem text={item?.type === 'free' ? 'Свободен' : 'В ремонте'} width={100}
@@ -65,7 +65,7 @@ const ProductItem = ({ item }: { item: IProduct }) => {
           <TextItem text={`c ${item?.guarantee.start}`} weight={400} size={15} />
           <TextItem text={`по ${item?.guarantee.end}`} weight={400} size={15} />
         </Box>
-        <TextItem text={item?.isNew ? 'НОВЫЙ' : 'Б/У'} weight={700} size={13} width={100}/>
+        <TextItem text={item?.isNew ? 'НОВЫЙ' : 'Б/У'} weight={700} size={13} width={100} />
         <Box
           display={'flex'}
           flexDirection={'column'}
@@ -75,10 +75,12 @@ const ProductItem = ({ item }: { item: IProduct }) => {
           <TextItem text={`${item?.price[0].value} ${item?.price[0].symbol}`} weight={400} size={9} />
           <TextItem text={`${item?.price[1].value} ${item?.price[1].symbol}`} weight={400} size={14} />
         </Box>
-        <TextItem text={item?.groupTitle} weight={400} size={14} borderBottom isTooltip width={200}/>
-        <TextItem text={item?.orderTitle} weight={400} size={14} borderBottom isTooltip width={200}/>
-        <TextItem text={item?.date} weight={400} size={14} width={80}/>
-        <DeleteTwoToneIcon sx={{ color: theme.palette.text.primary, cursor: 'pointer' }} />
+        <TextItem text={item?.groupTitle} weight={400} size={14} borderBottom isTooltip width={200} />
+        <TextItem text={item?.orderTitle} weight={400} size={14} borderBottom isTooltip width={200} />
+        <TextItem text={item?.date} weight={400} size={14} width={80} />
+        <Tooltip title={'Delete'} arrow>
+          <DeleteTwoToneIcon sx={{ color: theme.palette.text.primary, cursor: 'pointer' }} />
+        </Tooltip>
       </Box>
     </Paper>
   )

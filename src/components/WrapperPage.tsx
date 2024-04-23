@@ -1,11 +1,11 @@
 import React from 'react'
 import { Box } from '@mui/material'
 
-const WrapperPage = ({ children }: { children: React.ReactNode }) => {
+const WrapperPage = ({ children, content }: { children: React.ReactNode, content?: string }) => {
   return (
     <Box
       display={'flex'}
-      justifyContent={'center'}
+      justifyContent={content ?? 'center'}
       alignItems={'center'}
       width={'100vw'}
       minWidth={'max-content'}

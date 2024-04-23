@@ -8,7 +8,8 @@ export const theme = createTheme({
       dark: '#000000'
     },
     secondary: {
-      main: '#dc004e'
+      main: '#dc004e',
+      light: '#cfd8dc'
     },
     text: {
       primary: '#2C3C44',

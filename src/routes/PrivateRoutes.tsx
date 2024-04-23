@@ -9,7 +9,7 @@ const PrivateRoutes = () => {
   return (
     <Routes>
       <Route element={<Layout />}>
-        <Route path="*" element={<Navigate to="/" replace />} />
+        <Route path="*" element={<Navigate to="/orders" replace />} />
         <Route path="orders" element={<OrderPage />} />
         <Route path="groups" element={<MockPage />} />
         <Route path="products" element={<ProductPage />} />
