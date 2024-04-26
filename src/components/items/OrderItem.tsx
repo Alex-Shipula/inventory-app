@@ -5,7 +5,7 @@ import LibraryBooksIcon from '@mui/icons-material/LibraryBooks'
 import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 import { IOrder } from 'src/types'
-import TextItem from '../TextItem'
+import TextItem from './TextItem'
 
 interface IOrderItem {
   item: IOrder

@@ -3,7 +3,7 @@ import { Box, Paper, Tooltip, useTheme } from '@mui/material'
 import MonitorIcon from '@mui/icons-material/Monitor'
 import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone'
 import { IProduct } from 'src/types'
-import TextItem from '../TextItem'
+import TextItem from './TextItem'
 
 const ProductItem = ({ item }: { item: IProduct }) => {
   const theme = useTheme()
