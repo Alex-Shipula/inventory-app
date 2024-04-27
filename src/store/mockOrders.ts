@@ -11,12 +11,12 @@ export const mockOrders: IOrder[] = [
     description: 'Description 1',
     price: [
       {
-        value: 100,
+        value: 0,
         symbol: 'USD',
         isDefault: 1
       },
       {
-        value: 2500,
+        value: 0,
         symbol: 'UAH',
         isDefault: 0
       }
@@ -430,12 +430,12 @@ export const mockOrders: IOrder[] = [
     description: 'Description 1',
     price: [
       {
-        value: 100,
+        value: 0,
         symbol: 'USD',
         isDefault: 1
       },
       {
-        value: 2500,
+        value: 0,
         symbol: 'UAH',
         isDefault: 0
       }
@@ -651,12 +651,12 @@ export const mockOrders: IOrder[] = [
     description: 'Description 1',
     price: [
       {
-        value: 100,
+        value: 0,
         symbol: 'USD',
         isDefault: 1
       },
       {
-        value: 2500,
+        value: 0,
         symbol: 'UAH',
         isDefault: 0
       }
@@ -872,12 +872,12 @@ export const mockOrders: IOrder[] = [
     description: 'Description 1',
     price: [
       {
-        value: 100,
+        value: 0,
         symbol: 'USD',
         isDefault: 1
       },
       {
-        value: 2500,
+        value: 0,
         symbol: 'UAH',
         isDefault: 0
       }

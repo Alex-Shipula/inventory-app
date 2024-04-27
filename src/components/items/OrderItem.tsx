@@ -6,6 +6,7 @@ import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 import { IOrder } from 'src/types'
 import TextItem from './TextItem'
+import { calculateTotalCostOrderProduct } from 'src/utils/totalCostOrderProduct'
 
 interface IOrderItem {
   item: IOrder
@@ -72,8 +73,8 @@ const OrderItem = ({ item, isExpanded, setIsExpandedId, setAnchorEl, isExpandAll
           justifyContent={'start'}
           minWidth={'100px'}
         >
-          <TextItem text={`${item?.price[0].value} ${item?.price[0].symbol}`} weight={400} size={9} />
-          <TextItem text={`${item?.price[1].value} ${item?.price[1].symbol}`} weight={400} size={14} />
+          <TextItem text={`${calculateTotalCostOrderProduct([item])?.UAH} UAH`} weight={400} size={9} />
+          <TextItem text={`${calculateTotalCostOrderProduct([item])?.USD} USD`} weight={400} size={14} />
         </Box>}
         {!isExpandAll && <Tooltip title={'Delete'} arrow>
           <DeleteTwoToneIcon sx={{ color: theme.palette.text.primary, cursor: 'pointer' }} />

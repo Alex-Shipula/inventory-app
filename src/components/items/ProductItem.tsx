@@ -4,6 +4,7 @@ import MonitorIcon from '@mui/icons-material/Monitor'
 import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone'
 import { IProduct } from 'src/types'
 import TextItem from './TextItem'
+import { formatDateForTwo } from 'src/utils/formatDate'
 
 const ProductItem = ({ item }: { item: IProduct }) => {
   const theme = useTheme()
@@ -62,8 +63,8 @@ const ProductItem = ({ item }: { item: IProduct }) => {
           justifyContent={'start'}
           minWidth={'100px'}
         >
-          <TextItem text={`c ${item?.guarantee.start}`} weight={400} size={15} />
-          <TextItem text={`по ${item?.guarantee.end}`} weight={400} size={15} />
+          <TextItem text={`c ${formatDateForTwo(item?.guarantee.start)?.format2}`} weight={400} size={15} />
+          <TextItem text={`по ${formatDateForTwo(item?.guarantee.end)?.format2}`} weight={400} size={15} />
         </Box>
         <TextItem text={item?.isNew ? 'НОВЫЙ' : 'Б/У'} weight={700} size={13} width={100} />
         <Box
@@ -77,7 +78,15 @@ const ProductItem = ({ item }: { item: IProduct }) => {
         </Box>
         <TextItem text={item?.groupTitle} weight={400} size={14} borderBottom isTooltip width={200} />
         <TextItem text={item?.orderTitle} weight={400} size={14} borderBottom isTooltip width={200} />
-        <TextItem text={item?.date} weight={400} size={14} width={80} />
+        <Box
+          display={'flex'}
+          flexDirection={'column'}
+          alignItems={'center'}
+          justifyContent={'center'}
+        >
+          <TextItem text={formatDateForTwo(item?.date)?.format1} weight={400} size={14} width={80} />
+          <TextItem text={formatDateForTwo(item?.date)?.format2} weight={400} size={14} width={80} />
+        </Box>
         <Tooltip title={'Delete'} arrow>
           <DeleteTwoToneIcon sx={{ color: theme.palette.text.primary, cursor: 'pointer' }} />
         </Tooltip>
