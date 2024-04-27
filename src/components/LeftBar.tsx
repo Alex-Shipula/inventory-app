@@ -5,6 +5,8 @@ import { useLocation } from 'react-router-dom'
 import UserAvatar from './UserAvatar'
 import LeftBarItem from './items/LeftBarItem'
 
+const isMobile = window.innerWidth < 600
+
 const items = ['ПРИХОД', 'ГРУППЫ', 'ПРОДУКТЫ', 'ПОЛЬЗОВАТЕЛИ', 'НАСТРОЙКИ']
 
 const routerList = [
@@ -31,7 +33,7 @@ const LeftBar = () => {
       sx={{
         height: '100vh',
         backgroundColor: theme.palette.primary.light,
-        padding: '50px 50px',
+        padding: isMobile ? '5px 5px' : '50px 50px',
         boxShadow: '2px 18px 25px rgba(4, 2, 0.6, 0.3)'
       }}
     >

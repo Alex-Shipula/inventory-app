@@ -1,5 +1,6 @@
 { 
   "hosting": {
+    "site": "inventory-remote",
     "public": "build",
     "ignore": [
       "firebase.json",

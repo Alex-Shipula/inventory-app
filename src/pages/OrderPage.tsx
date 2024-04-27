@@ -1,11 +1,14 @@
 import React from 'react'
-import { Box } from '@mui/material'
+import { Box, Tooltip, useTheme } from '@mui/material'
+import AddCircleIcon from '@mui/icons-material/AddCircle'
 import WrapperPage from 'src/components/WrapperPage'
 import { mockOrders } from 'src/store/mockOrders'
 import OrderItem from 'src/components/items/OrderItem'
 import ProductPopper from 'src/components/items/ProductPopper'
 
 const OrderPage = () => {
+  const theme = useTheme()
+
   const [isExpandedId, setIsExpandedId] = React.useState<string>('')
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const selectOrder = mockOrders.find((item) => item.id === isExpandedId) ?? null
@@ -24,14 +27,35 @@ const OrderPage = () => {
         paddingTop={'50px'}
         paddingBottom={'50px'}
       >
+        <Box
+          width={'100%'}
+          display={'flex'}
+          alignItems={'center'}
+          justifyContent={'start'}
+          gap={'30px'}
+          paddingBottom={'50px'}
+        >
+          <Tooltip title={'Add order'}>
+            <AddCircleIcon sx={{ color: theme.palette.text.secondary, cursor: 'pointer', width: '60px', height: '60px' }} />
+          </Tooltip>
+          <Box
+            sx={{
+              color: theme.palette.text.primary,
+              fontSize: '32px',
+              fontWeight: 700
+            }}
+          >
+            Приходы / {mockOrders.length}
+          </Box>
+        </Box>
         {mockOrders.map((item) => {
           return <OrderItem item={item} key={item.id} isExpanded={item.id === isExpandedId}
-            setIsExpandedId={setIsExpandedId} setAnchorEl={setAnchorEl} isExpandAll={!!isExpandedId}/>
+            setIsExpandedId={setIsExpandedId} setAnchorEl={setAnchorEl} isExpandAll={!!isExpandedId} />
         })}
       </Box>
       {!!anchorEl && (
         <ProductPopper anchorEl={anchorEl} openPopper={!!anchorEl}
-          handleClosePopper={handleClosePopper} order={selectOrder}/>)}
+          handleClosePopper={handleClosePopper} order={selectOrder} />)}
     </WrapperPage>
   )
 }
