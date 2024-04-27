@@ -5,8 +5,18 @@ import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone'
 import { IProduct } from 'src/types'
 import TextItem from './TextItem'
 
-const ProductMiniItem = ({ item }: { item: IProduct | null }) => {
+interface IProductMiniItem {
+  item: IProduct | null
+  addProduct: (product: IProduct) => void
+}
+
+const ProductMiniItem = ({ item, addProduct }: IProductMiniItem) => {
   const theme = useTheme()
+
+  const handleDeleteProduct = () => {
+    item && addProduct(item)
+  }
+
   return (
     <>
       {item && <Box
@@ -44,7 +54,8 @@ const ProductMiniItem = ({ item }: { item: IProduct | null }) => {
         <TextItem text={item?.type === 'free' ? 'Свободен' : 'В ремонте'} width={35}
           color={item?.type === 'free' ? theme.palette.text.secondary : theme.palette.text.primary} weight={500} size={12} />
         <Tooltip title={'Delete'} arrow>
-          <DeleteTwoToneIcon sx={{ color: theme.palette.text.primary, cursor: 'pointer' }} />
+          <DeleteTwoToneIcon sx={{ color: theme.palette.text.primary, cursor: 'pointer' }}
+            onClick={handleDeleteProduct}/>
         </Tooltip>
       </Box>}
     </>

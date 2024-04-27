@@ -14,15 +14,20 @@ interface IOrderItem {
   setIsExpandedId: (id: string) => void
   setAnchorEl: (anchorEl: null | HTMLElement) => void
   isExpandAll: boolean
+  addOrder: (order: IOrder) => void
 }
 
-const OrderItem = ({ item, isExpanded, setIsExpandedId, setAnchorEl, isExpandAll }: IOrderItem) => {
+const OrderItem = ({ item, isExpanded, setIsExpandedId, setAnchorEl, isExpandAll, addOrder }: IOrderItem) => {
   const theme = useTheme()
   const ref = React.useRef(null)
 
   const handleOpenPopper = () => {
     setAnchorEl(ref?.current)
     setIsExpandedId(item.id)
+  }
+
+  const handleAddOrder = () => {
+    addOrder(item)
   }
 
   return (
@@ -77,7 +82,8 @@ const OrderItem = ({ item, isExpanded, setIsExpandedId, setAnchorEl, isExpandAll
           <TextItem text={`${calculateTotalCostOrderProduct([item])?.USD} USD`} weight={400} size={14} />
         </Box>}
         {!isExpandAll && <Tooltip title={'Delete'} arrow>
-          <DeleteTwoToneIcon sx={{ color: theme.palette.text.primary, cursor: 'pointer' }} />
+          <DeleteTwoToneIcon sx={{ color: theme.palette.text.primary, cursor: 'pointer' }}
+            onClick={handleAddOrder} />
         </Tooltip>}
       </Box>
       {isExpanded && (

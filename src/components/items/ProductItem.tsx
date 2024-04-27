@@ -6,8 +6,13 @@ import { IProduct } from 'src/types'
 import TextItem from './TextItem'
 import { formatDateForTwo } from 'src/utils/formatDate'
 
-const ProductItem = ({ item }: { item: IProduct }) => {
+const ProductItem = ({ item, addProduct }: { item: IProduct, addProduct: (product: IProduct) => void }) => {
   const theme = useTheme()
+
+  const handleDeleteProduct = () => {
+    addProduct(item)
+  }
+
   return (
     <Paper
       sx={{
@@ -88,7 +93,8 @@ const ProductItem = ({ item }: { item: IProduct }) => {
           <TextItem text={formatDateForTwo(item?.date)?.format2} weight={400} size={14} width={80} />
         </Box>
         <Tooltip title={'Delete'} arrow>
-          <DeleteTwoToneIcon sx={{ color: theme.palette.text.primary, cursor: 'pointer' }} />
+          <DeleteTwoToneIcon sx={{ color: theme.palette.text.primary, cursor: 'pointer' }}
+            onClick={handleDeleteProduct} />
         </Tooltip>
       </Box>
     </Paper>
