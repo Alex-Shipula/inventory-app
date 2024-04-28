@@ -6,7 +6,8 @@ import { useAuthWatchDog } from 'src/hooks/auth'
 import { getDataFirestore } from 'src/helpers/getDataFirestore'
 import { useDispatch } from 'react-redux'
 import { setProductsState, setProductsTotalCount } from 'src/store/products'
-import { setOrdersState, setOrdersTotalCount } from 'src/store/orders'
+import { setOrdersState } from 'src/store/orders'
+import { IOrder, IProduct } from 'src/types'
 
 const Routes = () => {
   const dispatch = useDispatch()
@@ -22,13 +23,11 @@ const Routes = () => {
     } else {
       setAuth('')
     }
-    getDataFirestore('products').then((data: any) => {
-      dispatch(setProductsState(data))
-      dispatch(setProductsTotalCount(data.length))
-    })!
     getDataFirestore('orders').then((data: any) => {
+      const allProducts: IProduct[] = data.map((item: IOrder) => item.products).flat()
       dispatch(setOrdersState(data))
-      dispatch(setOrdersTotalCount(data.length))
+      dispatch(setProductsState(allProducts))
+      dispatch(setProductsTotalCount(allProducts.length))
     })!
   }, [])
 

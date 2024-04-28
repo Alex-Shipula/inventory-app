@@ -8,6 +8,9 @@ import ProductMiniItem from './ProductMiniItem'
 import CustomizedModal from '../CustomizedModal'
 import TextItem from './TextItem'
 import MonitorIcon from '@mui/icons-material/Monitor'
+import { useDispatch, useSelector } from 'react-redux'
+import { selectOrdersState, setOrdersState, useUpdateOrderMutation } from 'src/store/orders'
+import { setProductsState } from 'src/store/products'
 
 interface IProductPopper {
   anchorEl: null | HTMLElement
@@ -19,6 +22,9 @@ interface IProductPopper {
 const ProductPopper = ({ anchorEl, openPopper, handleClosePopper, order }: IProductPopper
 ) => {
   const theme = useTheme()
+  const dispatch = useDispatch()
+  const allOrders = useSelector(selectOrdersState)
+  const [updateOrder] = useUpdateOrderMutation()
   const [productItem, setProductItem] = React.useState<IProduct | null>(null)
 
   const handleClose = () => {
@@ -26,7 +32,12 @@ const ProductPopper = ({ anchorEl, openPopper, handleClosePopper, order }: IProd
   }
 
   const handleDeleteProduct = () => {
-    console.log('delete')
+    const newOrderProducts: IProduct[] = order?.products?.filter((item) => item.id !== productItem?.id) ?? []
+    const newOrders: IOrder[] | undefined = allOrders?.map((item) => item.id === order?.id ? { ...item, products: newOrderProducts } : item)
+    const allProducts: IProduct[] | undefined = newOrders?.map((item: IOrder) => item.products).flat()
+    allProducts && dispatch(setProductsState(allProducts))
+    newOrders && dispatch(setOrdersState(newOrders))
+    order && updateOrder({ ...order, products: newOrderProducts })!
     handleClose()
   }
 
@@ -51,6 +62,7 @@ const ProductPopper = ({ anchorEl, openPopper, handleClosePopper, order }: IProd
           ]
         }}
         sx={{
+          maxWidth: '700px',
           minWidth: '300px',
           minHeight: '300px',
           borderRadius: '10px',

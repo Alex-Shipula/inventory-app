@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Box, Tooltip, useTheme } from '@mui/material'
 import AddCircleIcon from '@mui/icons-material/AddCircle'
 import WrapperPage from 'src/components/WrapperPage'
@@ -6,21 +6,40 @@ import OrderItem from 'src/components/items/OrderItem'
 import ProductPopper from 'src/components/items/ProductPopper'
 import CustomizedAutocomplete from 'src/components/CustomizedAutocomplete'
 import CustomizedModal from 'src/components/CustomizedModal'
-import { IOrder } from 'src/types'
+import { IOrder, IProduct } from 'src/types'
 import TextItem from 'src/components/items/TextItem'
-import { useSelector } from 'react-redux'
-import { selectOrdersState, selectOrdersTotalCount } from 'src/store/orders'
+import { useDispatch, useSelector } from 'react-redux'
+import {
+  selectOrdersState,
+  setOrdersState, useDeleteOrderMutation
+} from 'src/store/orders'
+import { setProductsState } from 'src/store/products'
+import { ordersFilter } from 'src/helpers/filters'
 
 const OrderPage = () => {
   const theme = useTheme()
+  const dispatch = useDispatch()
   const orders = useSelector(selectOrdersState)
-  const ordersTotalCount = useSelector(selectOrdersTotalCount)
+  const [deleteOrders] = useDeleteOrderMutation()
 
+  const [allOrders, setAllOrders] = React.useState<IOrder[] | undefined>(orders)
   const [isExpandedId, setIsExpandedId] = React.useState<string>('')
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const [orderItem, setOrderItem] = React.useState<IOrder | null>(null)
 
   const selectOrder = orders?.find((item) => item.id === isExpandedId) ?? null
+  const optionsOrdersFilter = [{ title: 'Все', value: 'all' }, ...orders?.map((item) => {
+    return { title: item?.title, value: item?.title }
+  }).filter((item, index, self) => self.findIndex((t) => t.title === item.title) === index)!]
+
+  useEffect(() => {
+    orders && setAllOrders(orders)
+  }, [orders])
+
+  const handleChangeType = (type: string) => {
+    const filteredOrders = ordersFilter(type, orders)
+    filteredOrders && setAllOrders(filteredOrders)
+  }
 
   const handleClosePopper = () => {
     setAnchorEl(null)
@@ -32,7 +51,11 @@ const OrderPage = () => {
   }
 
   const handleDeleteOrder = () => {
-    console.log('delete order')
+    const allOrders: IOrder[] | undefined = orders?.filter((item) => item.id !== orderItem?.id)
+    const allProducts: IProduct[] | undefined = allOrders?.map((item: IOrder) => item.products).flat()
+    allOrders && dispatch(setOrdersState(allOrders))
+    allProducts && dispatch(setProductsState(allProducts))
+    orderItem && deleteOrders(orderItem?.id)!
     setOrderItem(null)
   }
 
@@ -42,7 +65,7 @@ const OrderPage = () => {
 
   return (
     <>
-      <WrapperPage content={anchorEl ? 'start' : 'center'}>
+      <WrapperPage>
         <Box
           display={'flex'}
           flexDirection={'column'}
@@ -75,13 +98,12 @@ const OrderPage = () => {
                   fontWeight: 700
                 }}
               >
-                Приходы / {ordersTotalCount}
+                Приходы / {allOrders?.length}
               </Box>
             </Box>
             <CustomizedAutocomplete
-              options={[{ title: 'ddd', value: 'ffff' }]}
-              onChange={(e) => { console.log(e) }}
-              onInputChange={(e) => { console.log(e) }}
+              options={optionsOrdersFilter}
+              onChange={(e: { title: string, value: string } | null) => handleChangeType(e?.value ?? '')}
               textFieldProps={{
                 placeholder: 'Поиск по типу прихода',
                 sx: {
@@ -90,7 +112,7 @@ const OrderPage = () => {
               }}
             />
           </Box>
-          {orders?.map((item) => {
+          {allOrders?.map((item) => {
             return <OrderItem item={item} key={item.id} isExpanded={item.id === isExpandedId}
               setIsExpandedId={setIsExpandedId} setAnchorEl={setAnchorEl} isExpandAll={!!isExpandedId}
               addOrder={handleOpenDeleteOrder} />

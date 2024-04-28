@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Box, useTheme } from '@mui/material'
 
 import WrapperPage from 'src/components/WrapperPage'
@@ -7,23 +7,63 @@ import CustomizedAutocomplete from 'src/components/CustomizedAutocomplete'
 import CustomizedModal from 'src/components/CustomizedModal'
 import TextItem from 'src/components/items/TextItem'
 import MonitorIcon from '@mui/icons-material/Monitor'
-import { IProduct } from 'src/types'
-import { useSelector } from 'react-redux'
-import { selectProductsState, selectProductsTotalCount } from 'src/store/products'
+import { IOrder, IProduct } from 'src/types'
+import { useDispatch, useSelector } from 'react-redux'
+import {
+  selectProductsState, setProductsState,
+  useDeleteProductMutation
+} from 'src/store/products'
+import { selectOrdersState, setOrdersState } from 'src/store/orders'
+import { optionsProductFilter } from 'src/types/constants'
+import { productsFilter } from 'src/helpers/filters'
 
 const ProductPage = () => {
   const theme = useTheme()
+  const dispatch = useDispatch()
+  const orders = useSelector(selectOrdersState)
   const products = useSelector(selectProductsState)
-  const productsTotalCount = useSelector(selectProductsTotalCount)
+  const [deleteProducts] = useDeleteProductMutation()
 
+  const [allProducts, setAllProducts] = React.useState<IProduct[] | undefined>(products)
   const [productItem, setProductItem] = React.useState<IProduct | null>(null)
+  const [filterType, setFilterType] = React.useState<string>('')
+  const [filterSpecification, setFilterSpecification] = React.useState<string>('')
+
+  const optionsSpecificProductFilter = products?.map((item) => {
+    return { title: item?.title, value: item?.title }
+  }).filter((item, index, self) => self.findIndex((t) => t.title === item.title) === index)
+
+  useEffect(() => {
+    products && setAllProducts(products)
+  }, [products])
 
   const handleClose = () => {
     setProductItem(null)
   }
 
+  const handleChangeType = (type: string) => {
+    setFilterType(type)
+    const filteredProducts = productsFilter(type, filterSpecification, products)
+    filteredProducts && setAllProducts(filteredProducts)
+  }
+
+  const handleChangeSpecification = (specification: string) => {
+    setFilterSpecification(specification)
+    const filteredProducts = productsFilter(filterType, specification, products)
+    filteredProducts && setAllProducts(filteredProducts)
+  }
+
   const handleDeleteProduct = () => {
-    console.log('delete')
+    const allOrders: IOrder[] | undefined = orders?.map((item) => {
+      return {
+        ...item,
+        products: item.products.filter((product) => product.id !== productItem?.id)
+      }
+    })
+    const allProducts: IProduct[] | undefined = allOrders?.map((item: IOrder) => item.products).flat()
+    allOrders && dispatch(setOrdersState(allOrders))
+    allProducts && dispatch(setProductsState(allProducts))
+    productItem && deleteProducts(productItem?.id)!
     handleClose()
   }
 
@@ -56,12 +96,11 @@ const ProductPage = () => {
                 fontWeight: 700
               }}
             >
-              Продукты / {productsTotalCount}
+              Продукты / {allProducts?.length}
             </Box>
             <CustomizedAutocomplete
-              options={[{ title: 'ddd', value: 'ffff' }]}
-              onChange={(e) => { console.log(e) }}
-              onInputChange={(e) => { console.log(e) }}
+              options={optionsProductFilter}
+              onChange={(e: {title: string, value: string} | null) => handleChangeType(e?.value ?? 'all')}
               textFieldProps={{
                 placeholder: 'Поиск по типу продукта',
                 sx: {
@@ -70,9 +109,8 @@ const ProductPage = () => {
               }}
             />
             <CustomizedAutocomplete
-              options={[{ title: 'ddd', value: 'ffff' }]}
-              onChange={(e) => { console.log(e) }}
-              onInputChange={(e) => { console.log(e) }}
+              options={optionsSpecificProductFilter ?? []}
+              onChange={(e: {title: string, value: string} | null) => handleChangeSpecification(e?.value ?? '')}
               textFieldProps={{
                 placeholder: 'Поиск по спецификации',
                 sx: {
@@ -86,7 +124,7 @@ const ProductPage = () => {
             flexDirection={'column'}
             paddingBottom={'100px'}
             gap={'18px'}>
-            {products?.map((item, index) => {
+            {allProducts?.map((item, index) => {
               return <ProductItem item={item} key={index} addProduct={addProduct}/>
             })}
           </Box>
