@@ -21,7 +21,8 @@ const ProductItem = ({ item, addProduct }: { item: IProduct, addProduct: (produc
         backgroundColor: theme.palette.primary.light,
         borderRadius: '4px',
         width: '100%',
-        height: '90px',
+        minHeight: '90px',
+        maxHeight: '90px',
         overflow: 'hidden',
         '&:hover': {
           boxShadow: '2px 18px 25px rgba(4, 2, 4.6, 0.33)'
@@ -57,7 +58,7 @@ const ProductItem = ({ item, addProduct }: { item: IProduct, addProduct: (produc
           justifyContent={'start'}
           minWidth={'400px'}
         >
-          <TextItem text={item?.title} borderBottom isTooltip width={400} />
+          <TextItem text={item?.title} borderBottom isTooltip width={400} maxWidth={400}/>
           <TextItem text={`SN-${item?.serialNumber}`} weight={400} size={14} />
         </Box>
         <TextItem text={item?.type === 'free' ? 'Свободен' : 'В ремонте'} width={100}

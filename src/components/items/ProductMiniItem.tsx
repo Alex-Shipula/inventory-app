@@ -48,7 +48,7 @@ const ProductMiniItem = ({ item, addProduct }: IProductMiniItem) => {
           justifyContent={'start'}
           minWidth={'140px'}
         >
-          <TextItem text={item?.title} borderBottom isTooltip width={140} size={13}/>
+          <TextItem text={item?.title} borderBottom isTooltip width={340} size={13} maxWidth={340}/>
           <TextItem text={`SN-${item?.serialNumber}`} weight={400} size={10} />
         </Box>
         <TextItem text={item?.type === 'free' ? 'Свободен' : 'В ремонте'} width={35}

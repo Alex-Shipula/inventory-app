@@ -2,22 +2,25 @@ import React from 'react'
 import { Box, Tooltip, useTheme } from '@mui/material'
 import AddCircleIcon from '@mui/icons-material/AddCircle'
 import WrapperPage from 'src/components/WrapperPage'
-import { mockOrders } from 'src/store/mockOrders'
 import OrderItem from 'src/components/items/OrderItem'
 import ProductPopper from 'src/components/items/ProductPopper'
 import CustomizedAutocomplete from 'src/components/CustomizedAutocomplete'
 import CustomizedModal from 'src/components/CustomizedModal'
 import { IOrder } from 'src/types'
 import TextItem from 'src/components/items/TextItem'
+import { useSelector } from 'react-redux'
+import { selectOrdersState, selectOrdersTotalCount } from 'src/store/orders'
 
 const OrderPage = () => {
   const theme = useTheme()
+  const orders = useSelector(selectOrdersState)
+  const ordersTotalCount = useSelector(selectOrdersTotalCount)
 
   const [isExpandedId, setIsExpandedId] = React.useState<string>('')
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const [orderItem, setOrderItem] = React.useState<IOrder | null>(null)
 
-  const selectOrder = mockOrders.find((item) => item.id === isExpandedId) ?? null
+  const selectOrder = orders?.find((item) => item.id === isExpandedId) ?? null
 
   const handleClosePopper = () => {
     setAnchorEl(null)
@@ -72,7 +75,7 @@ const OrderPage = () => {
                   fontWeight: 700
                 }}
               >
-                Приходы / {mockOrders.length}
+                Приходы / {ordersTotalCount}
               </Box>
             </Box>
             <CustomizedAutocomplete
@@ -87,7 +90,7 @@ const OrderPage = () => {
               }}
             />
           </Box>
-          {mockOrders.map((item) => {
+          {orders?.map((item) => {
             return <OrderItem item={item} key={item.id} isExpanded={item.id === isExpandedId}
               setIsExpandedId={setIsExpandedId} setAnchorEl={setAnchorEl} isExpandAll={!!isExpandedId}
               addOrder={handleOpenDeleteOrder} />

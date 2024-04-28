@@ -3,15 +3,18 @@ import { Box, useTheme } from '@mui/material'
 
 import WrapperPage from 'src/components/WrapperPage'
 import ProductItem from 'src/components/items/ProductItem'
-import { mockProducts } from 'src/store/mockProducts'
 import CustomizedAutocomplete from 'src/components/CustomizedAutocomplete'
 import CustomizedModal from 'src/components/CustomizedModal'
 import TextItem from 'src/components/items/TextItem'
 import MonitorIcon from '@mui/icons-material/Monitor'
 import { IProduct } from 'src/types'
+import { useSelector } from 'react-redux'
+import { selectProductsState, selectProductsTotalCount } from 'src/store/products'
 
 const ProductPage = () => {
   const theme = useTheme()
+  const products = useSelector(selectProductsState)
+  const productsTotalCount = useSelector(selectProductsTotalCount)
 
   const [productItem, setProductItem] = React.useState<IProduct | null>(null)
 
@@ -34,12 +37,12 @@ const ProductPage = () => {
         <Box
           display={'flex'}
           flexDirection={'column'}
-          gap={'10px'}
-          paddingTop={'350px'}
-          paddingBottom={'50px'}
+          height={'100%'}
+          paddingTop={'50px'}
         >
           <Box
             width={'100%'}
+            height={'200px'}
             display={'flex'}
             alignItems={'center'}
             justifyContent={'start'}
@@ -53,7 +56,7 @@ const ProductPage = () => {
                 fontWeight: 700
               }}
             >
-              Продукты / {mockProducts.length}
+              Продукты / {productsTotalCount}
             </Box>
             <CustomizedAutocomplete
               options={[{ title: 'ddd', value: 'ffff' }]}
@@ -78,9 +81,15 @@ const ProductPage = () => {
               }}
             />
           </Box>
-          {mockProducts.map((item) => {
-            return <ProductItem item={item} key={item.id} addProduct={addProduct}/>
-          })}
+          <Box
+            display={'flex'}
+            flexDirection={'column'}
+            paddingBottom={'100px'}
+            gap={'18px'}>
+            {products?.map((item, index) => {
+              return <ProductItem item={item} key={index} addProduct={addProduct}/>
+            })}
+          </Box>
         </Box>
       </WrapperPage>
       <CustomizedModal title={'Вы уверены что хотите удалить этот продукт?'} open={!!productItem} handleClose={handleClose}
