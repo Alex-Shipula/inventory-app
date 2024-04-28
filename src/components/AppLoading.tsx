@@ -14,7 +14,7 @@ const AppLoading = () => {
       justifyContent="center"
       alignItems="center"
     >
-      <CircularProgress color="primary" />
+      <CircularProgress color="primary" style={{ height: '100px', width: '100px' }}/>
     </Stack>
   )
 }

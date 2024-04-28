@@ -15,6 +15,7 @@ import {
 } from 'src/store/orders'
 import { setProductsState } from 'src/store/products'
 import { ordersFilter } from 'src/helpers/filters'
+import AppLoading from 'src/components/AppLoading'
 
 const OrderPage = () => {
   const theme = useTheme()
@@ -112,6 +113,7 @@ const OrderPage = () => {
               }}
             />
           </Box>
+          {!allOrders?.length && <AppLoading />}
           {allOrders?.map((item) => {
             return <OrderItem item={item} key={item.id} isExpanded={item.id === isExpandedId}
               setIsExpandedId={setIsExpandedId} setAnchorEl={setAnchorEl} isExpandAll={!!isExpandedId}

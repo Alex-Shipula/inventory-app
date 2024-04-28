@@ -16,6 +16,7 @@ import {
 import { selectOrdersState, setOrdersState } from 'src/store/orders'
 import { optionsProductFilter } from 'src/types/constants'
 import { productsFilter } from 'src/helpers/filters'
+import AppLoading from 'src/components/AppLoading'
 
 const ProductPage = () => {
   const theme = useTheme()
@@ -119,6 +120,8 @@ const ProductPage = () => {
               }}
             />
           </Box>
+
+          {!products?.length && <AppLoading/>}
           <Box
             display={'flex'}
             flexDirection={'column'}
