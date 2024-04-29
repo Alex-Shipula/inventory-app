@@ -18,7 +18,7 @@ import { optionsProductFilter } from 'src/types/constants'
 import { productsFilter } from 'src/helpers/filters'
 import AppLoading from 'src/components/AppLoading'
 
-const ProductPage = () => {
+const ProductPage: React.FC = () => {
   const theme = useTheme()
   const dispatch = useDispatch()
   const orders = useSelector(selectOrdersState)

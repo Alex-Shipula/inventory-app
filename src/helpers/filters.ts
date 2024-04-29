@@ -26,6 +26,8 @@ const ordersFilter = (type: string, allOrders: IOrder[] | undefined) => {
       return item
     } else if (type === item.title) {
       return item
+    } else if (type === '') {
+      return item
     }
   })
 

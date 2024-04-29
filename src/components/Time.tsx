@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
-import useTheme from '@mui/material/styles/useTheme'
 import AccessTimeIcon from '@mui/icons-material/AccessTime'
-import Box from '@mui/material/Box'
+import { Box, useTheme } from '@mui/material'
 import Typography from '@mui/material/Typography'
 import { format } from 'date-fns'
 

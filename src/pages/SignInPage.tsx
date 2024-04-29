@@ -6,7 +6,7 @@ import {
   Button
 } from '@mui/material'
 
-const SignInPage = () => {
+const SignInPage: React.FC = () => {
   const theme = useTheme()
   const img = <img src={authImage} alt="img" />
 

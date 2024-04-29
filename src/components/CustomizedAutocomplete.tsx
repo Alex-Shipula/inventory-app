@@ -2,10 +2,9 @@ import React from 'react'
 
 import MuiAutocomplete from '@mui/material/Autocomplete'
 import Popper from '@mui/material/Popper'
-import useTheme from '@mui/material/styles/useTheme'
 import type { InputProps } from '@mui/material/Input'
 import type { AutocompleteProps as MuiAutocompleteProps } from '@mui/material/Autocomplete'
-import { TextField } from '@mui/material'
+import { TextField, useTheme } from '@mui/material'
 
 interface Option<T> {
   title: string

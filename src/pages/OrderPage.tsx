@@ -17,7 +17,7 @@ import { setProductsState } from 'src/store/products'
 import { ordersFilter } from 'src/helpers/filters'
 import AppLoading from 'src/components/AppLoading'
 
-const OrderPage = () => {
+const OrderPage: React.FC = () => {
   const theme = useTheme()
   const dispatch = useDispatch()
   const orders = useSelector(selectOrdersState)

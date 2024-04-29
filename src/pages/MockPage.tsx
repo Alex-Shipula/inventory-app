@@ -2,7 +2,7 @@ import React from 'react'
 import { Typography } from '@mui/material'
 import WrapperPage from 'src/components/WrapperPage'
 
-const MockPage = () => {
+const MockPage: React.FC = () => {
   return (
     <WrapperPage>
       <Typography fontSize={30} >
