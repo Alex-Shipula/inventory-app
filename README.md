@@ -32,7 +32,7 @@ After completing the setup, you can start the development server:
 This will run the application in development mode. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 ## Hosting
-[text](https://inventory-remote.web.app/)
+https://inventory-remote.web.app/orders
 
 ## Contributing
 Contributions are welcome! Feel free to submit bug reports, feature requests, or pull requests to help improve this project.
