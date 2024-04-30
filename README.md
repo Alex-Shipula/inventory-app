@@ -9,6 +9,7 @@ This project is a sales management. It utilizes various technologies such as Rea
 - [Technologies](#technologies)
 - [Setup](#setup)
 - [Usage](#usage)
+- [Hosting](#hosting)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -29,6 +30,9 @@ To run this project locally, follow these steps:
 ## Usage
 After completing the setup, you can start the development server:
 This will run the application in development mode. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+## Hosting
+[text](https://inventory-remote.web.app/)
 
 ## Contributing
 Contributions are welcome! Feel free to submit bug reports, feature requests, or pull requests to help improve this project.
